@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  mockdb:
+    image: mysql:latest
+    container_name: mockdb
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: customer
+      MYSQL_USER: ellis
+      MYSQL_PASSWORD: pass1234
+      MYSQL_ROOT_PASSWORD: pass1234
+    volumes:
+      - mysql-vol:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+  rest_app:
+    image: rest_app:latest
+    container_name: rest_app
+    build:
+      context: .
+    depends_on:
+      mockdb:
+        condition: service_healthy
+    ports:
+      - "8080:80"
+volumes:
+  mysql-vol:
