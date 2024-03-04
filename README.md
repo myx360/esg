@@ -1,5 +1,7 @@
 # esg_interview
 
+## Task 1
+
 To build and run the application:
 
 ```bash
@@ -34,4 +36,10 @@ GET: /api/customer/<ref> - Get a customer by reference (will 400 on ref that alr
 ```bash
 curl --location 'http://localhost:8080/api/customer/cus_12wd11f' \
 --header 'Content-Type: application/json'
+```
+
+## Task 2
+
+```bash
+java StringCalculator.java
 ```
